@@ -17,12 +17,19 @@ export const CartSlice = createSlice({
             // If item does not exist, add it to the cart with quantity 1
             state.items.push({ name, image, cost, quantity: 1 });
         }
+        console.log(state.items.length)
     },
     removeItem: (state, action) => {
         const { name, image, cost } = action.payload; 
         const existingItem = state.items.find(item => item.name === name);
         if (existingItem) {
-            state.items.pop({ name, image, cost, quantity: 1 });         
+            // state.items.pop({ name, image, cost, quantity: 1 });      
+            for (let i = state.items.length - 1; i >= 0; i--) {
+                if (state.items[i] === existingItem) {
+                  // Splice removes the item at the current index
+                  state.items.splice(i, 1);
+                }
+            }  
         } 
     },
     updateQuantity: (state, action) => {
