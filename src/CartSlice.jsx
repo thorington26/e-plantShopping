@@ -23,7 +23,8 @@ export const CartSlice = createSlice({
         const { name, image, cost } = action.payload; 
         const existingItem = state.items.find(item => item.name === name);
         if (existingItem) {
-            // state.items.pop({ name, image, cost, quantity: 1 });      
+            // state.items.pop({ name, image, cost, quantity: 1 }); //This only removes the last item in the array 
+            //The below loop fixes the functional error of the above statement     
             for (let i = state.items.length - 1; i >= 0; i--) {
                 if (state.items[i] === existingItem) {
                   // Splice removes the item at the current index
